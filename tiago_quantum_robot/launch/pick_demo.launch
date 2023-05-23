@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  
+  <!-- marker detector -->
+  <node pkg="aruco_ros" type="single"  name="aruco_single">
+      <remap from="/camera_info"       to="/xtion/rgb/camera_info" />
+      <remap from="/image"             to="/xtion/rgb/image_rect_color" />
+      <param name="image_is_rectified" value="True"/>
+      <param name="marker_size"        value="0.045"/>
+      <param name="marker_id"          value="582"/>
+      <param name="reference_frame"    value="/base_footprint"/>   <!-- frame in which the marker pose will be expressed -->
+      <param name="camera_frame"       value="xtion_rgb_optical_frame"/>
+      <param name="marker_frame"       value="aruco_frame" />
+      <param name="corner_refinement"  value="SUBPIX" />
+  </node>
+
+  <!-- Load definition of pregrasp motion into play_motion namespace -->
+
+   <node name="pose_transformer" pkg="tiago_quantum_robot" type="grasp_pose_publisher.py" output="screen"/>
+   <node name="aruco_detection_publisher" pkg="tiago_quantum_robot" type="tiago_aruco_detection.py" output="screen"/>
+   <node name="publish_reach_goal_with_voice" pkg="tiago_quantum_robot" type="tiago_reachgoal_publisher.py" output="screen"/>
+      
+</launch>

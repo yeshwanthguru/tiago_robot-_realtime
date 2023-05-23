@@ -1,0 +1,20 @@
+# play_motion.action
+
+# Define the PlayMotionGoal message, which specifies the motion to execute
+actionlib_msgs/GoalID goal_id
+string motion_name
+bool skip_planning
+
+# Define the PlayMotionResult message, which contains the result of the motion execution
+actionlib_msgs/GoalStatus status
+---
+# Define the PlayMotionFeedback message, which is used for providing feedback during the motion execution
+bool success
+float32 percent_complete
+float32 time_remaining
+---
+# Define the PlayMotionAction message, which encapsulates the goal, result, and feedback messages
+PlayMotionGoal goal
+PlayMotionResult result
+PlayMotionFeedback feedback
+
